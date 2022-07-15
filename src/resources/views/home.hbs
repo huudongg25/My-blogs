@@ -1,0 +1,17 @@
+<div class="mt-4 mb-4">
+  <div class="row">
+    {{#each Blog}}
+      <div class="col-lg-4 mt-4">
+        <div class="card card-info" style="width: 18rem;">
+          <div class="card-body">
+            <p class="card-name card-text">{{this.name}}</p>
+            <h6 class="card-subtitle mt-2 mb-1 text-muted">Card Blog</h6>
+            <a class="mt-3 btn btn-success" href="/profile/{{this.slug}}">
+              Detail</a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+
+  </div>
+</div>

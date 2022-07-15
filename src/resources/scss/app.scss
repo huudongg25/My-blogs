@@ -1,0 +1,51 @@
+.card-name {
+  text-decoration: none;
+  font-size: 22px;
+  font-style: italic;
+  color: rgb(158, 155, 155);
+}
+
+.wrapper {
+  background: url("https://neilpatel.com/wp-content/uploads/2018/10/blog.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 0 35px;
+}
+.navbar {
+  z-index: 2;
+  margin-bottom: -30px;
+}
+
+.content-card {
+  text-shadow: 3px 3px 3px #333;
+  color: #fff;
+  font-weight: 600;
+  & h2 {
+    background-color: rgba(151, 151, 151, 0.5);
+  }
+  & p {
+    background-color: rgba(151, 151, 151, 0.5);
+  }
+  & span {
+    background-color: rgba(151, 151, 151, 0.5);
+  }
+}
+
+.main-bg {
+  overflow-y: scroll;
+  padding: 20px 0;
+  height: 100vh;
+  background: linear-gradient(-85deg, rgb(255, 195, 195), rgb(124, 219, 80));
+}
+
+.main-bg::-webkit-scrollbar {
+  width: 4px;
+  background-color: transparent;
+}
+
+.card-info {
+  background-color: rgba(240, 240, 240, 0.9);
+}

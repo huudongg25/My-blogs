@@ -1,0 +1,22 @@
+<div class="mt-4">
+  <h1 class="mb-4">Edit blog</h1>
+  <form class="mt-4" method="post" action="/update/{{Blog._id}}?_method=PUT">
+    <div class="mb-3">
+      <label for="desc" class="form-label">Description</label>
+      <textarea
+      name="desc"
+        class="form-control"
+        id="desc"
+      >{{Blog.desc}}</textarea>
+      <label for="name" class="form-label">Name</label>
+      <input
+      name="name"
+        type="text"
+        class="form-control"
+        value="{{Blog.name}}"
+        id="name"
+      />
+
+    <button type="submit" class="mt-2 btn btn-primary">Save</button>
+  </form>
+</div>

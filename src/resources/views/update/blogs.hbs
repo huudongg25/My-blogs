@@ -1,0 +1,86 @@
+<div class="mt-4">
+  <div class="d-flex justify-content-between"><h1>My Blogs</h1>
+    <a href="/update/trash">Restore</a>
+  </div>
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Time</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each Blog}}
+        <tr>
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.name}}</td>
+          <td>{{this.updatedAt}}</td>
+          <td>
+            <a href="/update/{{this._id}}/edit" class="btn btn-success">Edit</a>
+            <a
+              href=""
+              class="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#delete-blog-modal"
+              data-id="{{this._id}}"
+            >Delete</a>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan="4" class="text-center">
+            There are no posts yet.
+            <a class="link-dark fw-semibold" href="/profile/create">Create your
+              blog</a>
+          </td>
+        </tr>
+
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+{{! delete log }}
+<div id="delete-blog-modal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete confirmation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to delete this blog?</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Cancel</button>
+        <button id="btn-delete-blog" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{! form delete }}
+<form name="delete-form" method="post">
+</form>
+
+<script>
+  document.addEventListener('DOMContentLoaded',function() { var blogId; const
+  deleteForm = document.forms['delete-form']; const blogModal =
+  document.getElementById('delete-blog-modal');
+  blogModal.addEventListener('show.bs.modal', event => { const button =
+  event.relatedTarget; blogId = button.getAttribute('data-id'); }); let
+  btnDeleteBlog = document.getElementById('btn-delete-blog');
+  btnDeleteBlog.onclick = function(){ deleteForm.action = '/update/' + blogId +
+  '?_method=DELETE';deleteForm.submit()} })
+</script>

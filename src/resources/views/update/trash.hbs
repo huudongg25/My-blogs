@@ -1,0 +1,96 @@
+<div class="mt-4">
+  <div class="d-flex justify-content-between"><h1>Blogs deleted</h1>
+    <a href="/update">Back</a>
+  </div>
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Time</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each Blog}}
+        <tr>
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.name}}</td>
+          <td>{{this.updatedAt}}</td>
+          <td>
+            <a
+              href=""
+              class="btn btn-success btn-restore"
+              data-id="{{this._id}}"
+            >Restore</a>
+            <a
+              href=""
+              class="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#delete-blog-modal"
+              data-id="{{this._id}}"
+            >Permanently delete</a>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan="4" class="text-center">
+            Empty
+          </td>
+        </tr>
+
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+{{! delete log }}
+<div id="delete-blog-modal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete confirmation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>Can't restore, still continue?</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >Cancel</button>
+        <button id="btn-delete-blog" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{! form delete }}
+<form name="delete-form" method="post">
+</form>
+
+<form name="restore-form" method="post">
+</form>
+
+<script>
+  document.addEventListener('DOMContentLoaded',function() { var btnRestore =
+  document.querySelectorAll('.btn-restore'); var blogId; const deleteForm =
+  document.forms['delete-form']; const restoreForm =
+  document.forms['restore-form']; const blogModal =
+  document.getElementById('delete-blog-modal');
+  blogModal.addEventListener('show.bs.modal', event => { const button =
+  event.relatedTarget; blogId = button.getAttribute('data-id'); }); let
+  btnDeleteBlog = document.getElementById('btn-delete-blog');
+  btnDeleteBlog.onclick = function(){ deleteForm.action = '/update/' + blogId +
+  '/force?_method=DELETE';deleteForm.submit()}; btnRestore.forEach((item) => {
+  item.addEventListener('click', (e) => { e.preventDefault(); var restoreId =
+  item.getAttribute('data-id'); restoreForm.action = '/update/' + restoreId +
+  '/restore?_method=PATCH'; restoreForm.submit(); }); }); })
+</script>
